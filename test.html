@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-in</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+
+
+
+<script>
+    var timeleft = 100;
+        var downloadTimer = setInterval(function(){
+            if(timeleft <= 0){
+                clearInterval(downloadTimer);
+                $(".rb").show();
+                $(".rb").attr("disabled",true);
+                document.getElementById("countdown").innerHTML = "Finished";
+            } else {
+                document.getElementById("countdown").innerHTML = timeleft + " seconds remaining";
+            }
+            timeleft -= 1;
+        }, 1000);
+</script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <section id="container">
+
+        <br>
+        <div id="countdown"></div>
+        
+        <div class="bold" style="text-align: center;">Hello</div>
+        <hr>
+        <div class="bold" style="text-align: center;">Total marks : 20</div>
+        <hr>
+        <div class="regular" style="text-align: center;">Your marks : <span id="gain_mark"></span></div>
+        <hr>
+
+        
+        <table>
+            <tr>
+                <td class="large">1. Country name?    <b id="marks" style="color:green;">10</b></td>
+            </tr>
+            <tr>
+                <td><input type = "radio" class="rb" name = "1" id="Option1" value="Ban">Ban</td>
+            </tr>
+            <tr>
+                <td><input type = "radio" class="rb" name = "1" id="Option2" value="Afg">Afg</td>
+            </tr>
+            <tr>
+                <td><input type = "radio" class="rb" name = "1" id="Option3" value="Ind">Ind</td>
+            </tr>
+            <tr>
+                <td><input type = "radio" class="rb" name = "1" id="Option4" value="Pak">Pak</td>
+            </tr>
+
+            <tr>
+                <td><label class="rb" style="display: none; color : green;"><b  id="1" class="right_answer">Ban</b></label></td>
+            </tr>
+
+        </table>
+        <hr>
+
+
+        <table>
+            <tr>
+                <td class="large">2. Country name?    <b id="marks" style="color:green;">10</b></td>
+            </tr>
+            <tr>
+                <td><input type = "radio" class="rb" name = "2" id="Option1" value="Ban">Ban</td>
+            </tr>
+            <tr>
+                <td><input type = "radio" class="rb" name = "2" id="Option2" value="Afg">Afg</td>
+            </tr>
+            <tr>
+                <td><input type = "radio" class="rb" name = "2" id="Option3" value="Ind">Ind</td>
+            </tr>
+            <tr>
+                <td><input type = "radio" class="rb" name = "2" id="Option4" value="Pak">Pak</td>
+            </tr>
+
+            <tr>
+                <td><label class="rb" style="display: none; color : green;"><b  id="2" class="right_answer">Ban</b></label></td>
+            </tr>
+
+        </table>
+        <hr>
+        
+
+        <div>
+            <input type="button" value="Check Answer" id="b1" onclick="getanswers()">
+        </div>
+        <div style="margin-top: 10px;">
+            <input type="button" value="Get marks" id="b1" onclick="getmarks()">
+        </div>
+        <br>
+        <b id="UserAnswers"></b>
+        </div>
+
+        <form action="" method="POST">
+            
+            <input type="submit" value="Submit" id="submit-btn">
+            <hr>
+        </form>
+
+    </section>
+
+    <script>
+
+        $(document).ready(function(){
+            $("#b1").click(function(){
+                $(".rb").show();
+                $(".rb").attr("disabled",true);
+            });
+        });
+
+
+        function getanswers()
+        {
+            document.getElementById("UserAnswers").innerHTML = "";
+            var e = document.getElementsByTagName("input");
+            for(i = 0 ; i<=e.length;i++)
+            {
+                if(e[i].type=="radio")
+                {
+                    if(e[i].checked)
+                    {
+                        document.getElementById("UserAnswers").innerHTML+="Q"+e[i].name + ". The Answers You Are Selected Is : "+e[i].value+"<br>";
+                    }
+                }
+            }
+        }
+
+        function getmarks()
+        {
+            document.getElementById("gain_mark").innerHTML = "";
+            var e = document.getElementsByTagName("input");
+            var marks = new Number(0);
+            //document.getElementById("gain_mark").innerHTML+= marks;
+            for(i = 0 ; i<=e.length;i++){
+                if(e[i].type=="radio")
+                {
+                    if(e[i].checked)
+                    {
+                        var ans1=e[i].value;
+                        var ans2=document.getElementById(e[i].name).innerHTML;
+                        //marks=0;
+                        if(ans1 === ans2){
+                            marks++;
+                            
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+            }
+            
+            document.getElementById("gain_mark").innerHTML+= marks;
+	    
+        }
+
+    </script>
+
+
+
+
+
+</body>
+</html>
